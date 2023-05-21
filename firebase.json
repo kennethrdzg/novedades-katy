@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/novedades-katy",
+    "public": "www",
     "ignore": [
       "firebase.json",
       "**/.*",
