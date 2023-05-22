@@ -17,7 +17,12 @@ export class FirebaseService {
         router.navigate(['login']);
       }
       else{
-        router.navigate(['home']);
+        if(router.url == '/login'){
+          router.navigate(['home']);
+        }
+        else{
+          router.navigate([router.url]);
+        }
       }
     })
   }
