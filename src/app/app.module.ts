@@ -6,9 +6,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {initializeApp} from 'firebase/app'
-import {environment} from '../environments/environment'
+import {environment} from '../environments/environment.prod'
 import { HttpClientModule } from '@angular/common/http';
+
+//Firebase
+import {initializeApp} from 'firebase/app'
+import {getAuth} from 'firebase/auth'
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppModule {
   constructor(){
-    initializeApp(environment.firebaseConfig);
+    const app = initializeApp(environment.firebaseConfig);
+    getAuth(app);
   }
 }
