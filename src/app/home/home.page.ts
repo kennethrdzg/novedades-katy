@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FirebaseService } from '../firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private db: FirebaseService) {}
+  get_inventario(){
+    this.db.getInventario().subscribe(
+      res => {
+        console.log(res);
+      }
+    );
+  }
+  ngOnInit(){
+    console.log('Hello')
+    this.get_inventario();
+  }
 }
