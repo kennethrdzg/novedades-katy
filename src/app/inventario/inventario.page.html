@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="home">REGRESAR</ion-button>
+    </ion-buttons>
+    <ion-title>INVENTARIO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">inventario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row *ngFor="let producto of productos; index as i">
+      <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
+        <ion-card>
+          <p>Producto: {{producto['Nombre']}}</p>
+          <p>Precio: $ {{producto['Precio']}} MXN</p>
+          <p>{{producto['Descripción']}}</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="mostrarInventarioAnterior()" [disabled]="pagina_actual <= 1">
+          PREVIOUS
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="mostrarInventarioSiguiente()" [disabled]="pagina_actual >= ultima_pagina">
+          NEXT
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
