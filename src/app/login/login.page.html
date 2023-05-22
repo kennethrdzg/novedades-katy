@@ -11,6 +11,23 @@
     </ion-toolbar>
   </ion-header>
   <div id="container">
-    <p>Bienvenido</p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-input
+      id="email"
+      label="Correo electrónico"
+      placeholder="ejemplo@dominio.com"
+      type="email"
+      formControlName="email"
+      errorText="Correo inválido"
+      ></ion-input>
+      <ion-input
+      id="password"
+      label="Contraseña"
+      placeholder="ejemplo1234!"
+      type="password"
+      formControlName="password"
+      ></ion-input>
+      <ion-button type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
+    </form>
   </div>
 </ion-content>

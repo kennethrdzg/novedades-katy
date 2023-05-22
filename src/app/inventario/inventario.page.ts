@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-inventario',
@@ -17,6 +18,12 @@ export class InventarioPage implements OnInit {
     private db: FirebaseService, 
     private route: ActivatedRoute, 
     private router: Router) {
+      /*const auth = getAuth();
+      auth.onAuthStateChanged( (user) => {
+        if(!user){
+          router.navigate(['login']);
+        }
+      });*/
   }
 
   ngOnInit() {
@@ -36,9 +43,7 @@ export class InventarioPage implements OnInit {
     ); 
   }
   actualizarPaginaActual(){
-    console.log('test')
     this.pagina_actual = Number(this.route.snapshot.params['id']);
-
     if(this.pagina_actual > this.ultima_pagina){
       this.pagina_actual = this.ultima_pagina;
     }

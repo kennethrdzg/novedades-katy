@@ -1,5 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import { FirebaseService } from '../firebase.service';
+import { getAuth } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,18 @@ import { FirebaseService } from '../firebase.service';
 })
 export class HomePage {
 
-  constructor(private db: FirebaseService) {}
+  constructor(private db: FirebaseService, 
+    private router: Router) {
+    /*const auth = getAuth();
+    auth.onAuthStateChanged( (user) =>{
+      if(!user){
+        this.router.navigate(['login'])
+      }
+    })*/
+  }
   ngOnInit(){
+  }
+  logOut(){
+    this.db.logOut();
   }
 }
