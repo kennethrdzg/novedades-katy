@@ -9,7 +9,6 @@ export class FirebaseService {
   constructor(private http: HttpClient) {}
 
   getInventario(){
-    let response = this.http.get('https://novedades-katy-default-rtdb.firebaseio.com/empleados.json')
-    return response;
+    return this.http.get('https://novedades-katy-default-rtdb.firebaseio.com/productos.json');
   }
 }
