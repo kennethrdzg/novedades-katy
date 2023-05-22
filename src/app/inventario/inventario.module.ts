@@ -13,7 +13,7 @@ import { InventarioPage } from './inventario.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InventarioPageRoutingModule
+    InventarioPageRoutingModule, 
   ],
   declarations: [InventarioPage]
 })

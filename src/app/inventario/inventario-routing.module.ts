@@ -5,9 +5,14 @@ import { InventarioPage } from './inventario.page';
 
 const routes: Routes = [
   {
+    path: ':id', 
+    component: InventarioPage,
+  },
+  {
     path: '',
-    component: InventarioPage
-  }
+    redirectTo: '1', 
+    pathMatch: 'full'
+  }, 
 ];
 
 @NgModule({
