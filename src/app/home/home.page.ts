@@ -9,15 +9,6 @@ import { FirebaseService } from '../firebase.service';
 export class HomePage {
 
   constructor(private db: FirebaseService) {}
-  get_inventario(){
-    this.db.getInventario().subscribe(
-      res => {
-        console.log(res);
-      }
-    );
-  }
   ngOnInit(){
-    console.log('Hello')
-    this.get_inventario();
   }
 }
