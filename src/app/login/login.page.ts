@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +10,8 @@ import { FormBuilder } from '@angular/forms';
 export class LoginPage implements OnInit {
 
   loginForm = this.fb.group({
-    email: [''], 
-    password: ['']
+    email: ['', [Validators.required, Validators.email]], 
+    password: ['', [Validators.required]]
   })
 
   constructor(
