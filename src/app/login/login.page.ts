@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { FormBuilder } from '@angular/forms';
-import { getAuth } from 'firebase/auth';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +16,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private db: FirebaseService, 
-    private fb: FormBuilder, private router: Router
+    private fb: FormBuilder
   ) {
-    const auth = getAuth();
-    auth.onAuthStateChanged( (user) => {
-      if(user){
-        router.navigate(['home'])
-      }
-    });
   }
 
   ngOnInit() {

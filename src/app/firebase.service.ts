@@ -16,6 +16,9 @@ export class FirebaseService {
       if(!user){
         router.navigate(['login']);
       }
+      else{
+        router.navigate(['home']);
+      }
     })
   }
 
@@ -30,15 +33,13 @@ export class FirebaseService {
     .then( (userCredential) => {
       //Signed In
       const user = userCredential.user;
-      console.log("User: " + user);
     })
     .catch( (error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log("Error code: " + errorCode)
-      console.log(errorMessage);
+      console.error("Error code: " + errorCode)
+      console.error(errorMessage);
     });
-    this.router.navigate(['home'])
   }
 
   logOut(){
@@ -46,7 +47,7 @@ export class FirebaseService {
     signOut(auth).then( () => {
       console.log("Sign-out succesful");
     }).catch( (error) => {
-      console.log(error.code);
+      console.error(error.code);
       console.error(error.message);
     })
   }
