@@ -13,15 +13,56 @@
       <ion-title size="large">ventas</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card *ngFor="let producto of productos; index as i">
-    <p>{{i}}</p>
-  </ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>ID</ion-col>
+        <ion-col>Artículo</ion-col>
+        <ion-col>Precio Unitario</ion-col>
+        <ion-col>Cantidad</ion-col>
+        <ion-col>Eliminar</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let producto of ticket_productos; index as i">
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{producto.id_producto}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col class="columna-nombre">
+          <ion-card>
+            <ion-card-content>
+              {{producto.nombre}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col class="columna-precio">
+          <ion-card>
+            <ion-card-content>
+              {{producto.precio}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <ion-input type="number" [(ngModel)]="producto.unidades" min="1" errorText="Entrada Inválida" value="{{producto.unidades}}"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="quitarProducto(i)">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   <form [formGroup]="productoForm" (ngSubmit)="agregarProducto()">
     <ion-row>
       <ion-col>
         <ion-card>
           <ion-card-content>
-            <ion-input label="Producto" formControlName="codigo"></ion-input>
+            <ion-input label="Producto" formControlName="id"></ion-input>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -29,5 +70,15 @@
         <ion-button type="submit" [disabled]="!productoForm.valid">Agregar</ion-button>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="producto_inexistente">
+      <ion-col>
+        <div>Producto Inexistente</div>
+      </ion-col>
+    </ion-row>
   </form>
+  <ion-row style="text-align: center;">
+    <ion-col>
+      <ion-button (click)="realizarVenta()">Realizar Venta</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

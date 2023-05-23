@@ -27,22 +27,6 @@ export class InventarioPage implements OnInit {
   ngOnInit() {
     console.log('test 1')
     this.getInventario();
-    this.getRol();
-  }
-
-  getRol(){
-    console.log('Tesing: ' + this.firebase.admin)
-    this.firebase.getRol()?.then(
-      respuesta => {
-        if(respuesta.exists()){
-          console.log('HELP')
-        }
-      }
-    ).catch(
-      err => {
-        console.error(err);
-      }
-    )
   }
 
   getInventario(){
@@ -69,6 +53,7 @@ export class InventarioPage implements OnInit {
     );
   }
   actualizarPaginaActual(){
+    console.log(this.router.url.split('/'));
     this.pagina_actual = Number(this.route.snapshot.params['id']);
     if(this.pagina_actual > this.ultima_pagina){
       this.pagina_actual = this.ultima_pagina;
