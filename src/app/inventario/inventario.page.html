@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button href="home">REGRESAR</ion-button>
+      <ion-button (click)="router.navigate(['home'])">REGRESAR</ion-button>
     </ion-buttons>
     <ion-title>INVENTARIO</ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col>
 
-          <ion-button href="producto-nuevo">
+          <ion-button *ngIf="this.firebase.admin" (click)="router.navigate(['producto-nuevo'])">
             Nuevo Producto
           </ion-button>
         </ion-col>

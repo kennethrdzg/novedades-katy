@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../producto';
 import { FirebaseService } from '../firebase.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ventas',
@@ -15,7 +16,7 @@ export class VentasPage implements OnInit {
     codigo: ['', [Validators.required]]
   })
   constructor(private firebase: FirebaseService, 
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, protected router: Router) { }
 
   ngOnInit() {
   }

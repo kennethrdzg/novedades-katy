@@ -9,19 +9,25 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  admin: boolean = false;
   constructor(private firebase: FirebaseService, 
-    private router: Router) {
-    /*const auth = getAuth();
-    auth.onAuthStateChanged( (user) =>{
-      if(!user){
-        this.router.navigate(['login'])
-      }
-    })*/
+    protected router: Router) {
+      this.getRol();
   }
   ngOnInit(){
   }
   logOut(){
     this.firebase.logOut();
+  }
+
+  getRol(){
+    console.log("Test")
+    this.firebase.getRol()?.then(
+      respuesta => {
+        console.log(respuesta);
+      }
+    ).catch( err => {
+      console.log(err);
+    })
   }
 }
