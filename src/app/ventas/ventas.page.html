@@ -13,4 +13,21 @@
       <ion-title size="large">ventas</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngFor="let producto of productos; index as i">
+    <p>{{i}}</p>
+  </ion-card>
+  <form [formGroup]="productoForm" (ngSubmit)="agregarProducto()">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-input label="Producto" formControlName="codigo"></ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" [disabled]="!productoForm.valid">Agregar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

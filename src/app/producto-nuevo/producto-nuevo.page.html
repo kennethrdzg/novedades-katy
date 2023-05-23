@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>ProductoNuevo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">ProductoNuevo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container">
+    <form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input label="Nombre del Producto" placeholder="Texto aquí" maxlength="50" formControlName="nombre"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input label="Precio (MXN)" type="number" placeholder="100.0" formControlName="precio" errorText="Precio inválido"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input label="Descripción" type="text" placeholder="Texto aquí" maxlength="200" formControlName="descripcion"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" [disabled]="!productForm.valid">Agregar Producto</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

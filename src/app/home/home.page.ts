@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private db: FirebaseService, 
+  constructor(private firebase: FirebaseService, 
     private router: Router) {
     /*const auth = getAuth();
     auth.onAuthStateChanged( (user) =>{
@@ -22,6 +22,6 @@ export class HomePage {
   ngOnInit(){
   }
   logOut(){
-    this.db.logOut();
+    this.firebase.logOut();
   }
 }

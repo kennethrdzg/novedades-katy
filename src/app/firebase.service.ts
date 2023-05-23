@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http'
 //Firebase
 import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
 import { Router } from '@angular/router';
+import {environment} from '../environments/environment.prod'
+import { Producto } from './producto';
+import { getDatabase, ref, push, onValue, child, get} from 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +31,8 @@ export class FirebaseService {
   }
 
   getInventario(){
-    return this.http.get('https://novedades-katy-default-rtdb.firebaseio.com/productos.json');
+    const databaseRef= ref(getDatabase());
+    return get(child(databaseRef, 'productos'));
   }
 
   logIn(email: string, password: string){
@@ -55,5 +59,16 @@ export class FirebaseService {
       console.error(error.code);
       console.error(error.message);
     })
+  }
+
+  //Inventario
+  getProductoPorCodigo(codigo: string){
+    return this.http.get(environment.firebaseConfig.databaseURL + '/productos/' + codigo + '.json')
+  }
+  
+  cargarProductoNuevo(nuevo_producto: Producto){
+    const database = getDatabase();
+    return push(ref(database, 'productos/'), nuevo_producto)
+    //return this.http.post(environment.firebaseConfig.databaseURL + '/productos.json', nuevo_producto);
   }
 }
