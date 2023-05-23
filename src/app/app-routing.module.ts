@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./ventas/ventas.module').then( m => m.VentasPageModule)
   },
   {
+    path: 'producto-nuevo',
+    loadChildren: () => import('./producto-nuevo/producto-nuevo.module').then( m => m.ProductoNuevoPageModule)
+  },
+  {
     path: '**', 
     redirectTo: '404', 
     pathMatch: 'full'

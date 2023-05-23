@@ -13,29 +13,39 @@
       <ion-title size="large">inventario</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
-    <ion-row *ngFor="let producto of productos; index as i">
-      <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
-        <ion-card>
-          <p>Producto: {{producto['Nombre']}}</p>
-          <p>Precio: $ {{producto['Precio']}} MXN</p>
-          <p>{{producto['Descripción']}}</p>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="mostrarInventarioAnterior()" [disabled]="pagina_actual <= 1">
-          PREVIOUS
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="mostrarInventarioSiguiente()" [disabled]="pagina_actual >= ultima_pagina">
-          NEXT
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+
+          <ion-button href="producto-nuevo">
+            Nuevo Producto
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="productos.length > 0">
+      <ion-row *ngFor="let producto of productos; index as i">
+        <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
+          <ion-card>
+            <p>Producto: {{producto['nombre']}}</p>
+            <p>Precio: $ {{producto['precio']}} MXN</p>
+            <p>{{producto['descripcion']}}</p>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="mostrarInventarioAnterior()" [disabled]="pagina_actual <= 1">
+            PREVIOUS
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="mostrarInventarioSiguiente()" [disabled]="pagina_actual >= ultima_pagina">
+            NEXT
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

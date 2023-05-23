@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 //Firebase
 import {initializeApp} from 'firebase/app'
 import {getAuth} from 'firebase/auth';
+import {getDatabase} from 'firebase/database'
+
 import { ServiceWorkerModule } from '@angular/service-worker'
 
 @NgModule({
@@ -28,6 +30,7 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 export class AppModule {
   constructor(){
     const app = initializeApp(environment.firebaseConfig);
-    getAuth(app);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
   }
 }
