@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   })
 
   constructor(
-    private db: FirebaseService, 
+    private firebase: FirebaseService, 
     private fb: FormBuilder
   ) {
   }
@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    this.db.logIn(this.email?.getRawValue(), this.password?.getRawValue());
+    this.firebase.logIn(this.email?.getRawValue(), this.password?.getRawValue());
   }
 
   get email(){

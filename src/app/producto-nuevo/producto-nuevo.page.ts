@@ -16,7 +16,7 @@ export class ProductoNuevoPage implements OnInit {
     descripcion: ['']
   })
   constructor(
-    private db: FirebaseService, 
+    private firebase: FirebaseService, 
     private fb: FormBuilder, 
     private router: Router
   ) { }
@@ -30,7 +30,7 @@ export class ProductoNuevoPage implements OnInit {
       'precio': this.precio?.getRawValue(), 
       'descripcion': this.descripcion?.getRawValue()
     }
-    this.db.cargarProductoNuevo(nuevo_producto).then(
+    this.firebase.cargarProductoNuevo(nuevo_producto).then(
       respuesta => {
         console.log(respuesta);
       }

@@ -14,7 +14,7 @@ export class VentasPage implements OnInit {
   productoForm = this.fb.group({
     codigo: ['', [Validators.required]]
   })
-  constructor(private db: FirebaseService, 
+  constructor(private firebase: FirebaseService, 
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class VentasPage implements OnInit {
 
   agregarProducto(){
     console.log(this.codigo?.getRawValue());
-    this.db.getProductoPorCodigo( this.codigo?.getRawValue() ).subscribe(
+    this.firebase.getProductoPorCodigo( this.codigo?.getRawValue() ).subscribe(
       response => {
         let producto: any = response;
         this.productos.push(producto);

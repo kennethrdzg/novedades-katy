@@ -16,7 +16,7 @@ export class InventarioPage implements OnInit {
   pagina_actual = 1;
   ultima_pagina = 1;
   constructor(
-    private db: FirebaseService, 
+    private firebase: FirebaseService, 
     private route: ActivatedRoute, 
     private router: Router) {
       /*const auth = getAuth();
@@ -32,7 +32,7 @@ export class InventarioPage implements OnInit {
   }
 
   getInventario(){
-    this.db.getInventario().then(
+    this.firebase.getInventario().then(
       snapshot => {
         if(snapshot.exists()){
           let values = snapshot.val();
