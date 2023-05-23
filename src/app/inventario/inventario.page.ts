@@ -15,20 +15,34 @@ export class InventarioPage implements OnInit {
   productos_por_pagina = 2;
   pagina_actual = 1;
   ultima_pagina = 1;
+
+  admin: boolean = false;
   constructor(
-    private firebase: FirebaseService, 
+    protected firebase: FirebaseService, 
     private route: ActivatedRoute, 
-    private router: Router) {
-      /*const auth = getAuth();
-      auth.onAuthStateChanged( (user) => {
-        if(!user){
-          router.navigate(['login']);
-        }
-      });*/
+    protected router: Router) {
+      console.log('test 2')
   }
 
   ngOnInit() {
+    console.log('test 1')
     this.getInventario();
+    this.getRol();
+  }
+
+  getRol(){
+    console.log('Tesing: ' + this.firebase.admin)
+    this.firebase.getRol()?.then(
+      respuesta => {
+        if(respuesta.exists()){
+          console.log('HELP')
+        }
+      }
+    ).catch(
+      err => {
+        console.error(err);
+      }
+    )
   }
 
   getInventario(){

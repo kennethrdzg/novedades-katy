@@ -6,20 +6,33 @@ import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut} from '
 import { Router } from '@angular/router';
 import {environment} from '../environments/environment.prod'
 import { Producto } from './producto';
-import { getDatabase, ref, push, onValue, child, get} from 'firebase/database';
+import { getDatabase, ref, push, onValue, child, get, set} from 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
   logged_user: any
+  admin: boolean = false;
   constructor(private http: HttpClient, private router: Router) {
     const auth = getAuth();
     auth.onAuthStateChanged( (user) => {
+      this.admin = false;
       if(!user){
         router.navigate(['login']);
       }
       else{
+        this.getRol()?.then(
+          respuesta => {
+            if(respuesta.exists()){
+              let values = respuesta.val();
+              this.admin = (values['rol'] == 'admin');
+              console.log(this.admin);
+            }
+          }
+        ).catch( err => {
+          console.error(err);
+        })
         if(router.url == '/login'){
           router.navigate(['home']);
         }
@@ -42,6 +55,7 @@ export class FirebaseService {
     .then( (userCredential) => {
       //Signed In
       const user = userCredential.user;
+      this.logged_user = user
     })
     .catch( (error) => {
       const errorCode = error.code;
@@ -70,5 +84,20 @@ export class FirebaseService {
     const database = getDatabase();
     return push(ref(database, 'productos/'), nuevo_producto)
     //return this.http.post(environment.firebaseConfig.databaseURL + '/productos.json', nuevo_producto);
+  }
+
+  getRol(){
+    const auth = getAuth();
+    const databaseRef = ref(getDatabase());
+
+    if(auth.currentUser == null){
+      return;
+    };
+    //return get(child(databaseRef, 'productos/'+auth.currentUser.uid));
+    return get(child(databaseRef, 'empleados/'+auth.currentUser.uid));
+  }
+
+  getEsAdmin(){
+    return this.admin;
   }
 }

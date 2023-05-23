@@ -18,7 +18,7 @@ export class ProductoNuevoPage implements OnInit {
   constructor(
     private firebase: FirebaseService, 
     private fb: FormBuilder, 
-    private router: Router
+    protected router: Router
   ) { }
 
   ngOnInit() {
