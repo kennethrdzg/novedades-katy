@@ -4,7 +4,7 @@ import { FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { TicketProducto } from '../ticket-producto';
 import { Producto } from '../producto';
-import { Ticket } from '../ticket';
+import {jsPDF} from 'jspdf'
 
 @Component({
   selector: 'app-ventas',
@@ -84,7 +84,6 @@ export class VentasPage implements OnInit {
     for(let producto of this.ticket_productos){
       ingreso = ingreso + producto.precio * producto.unidades;
     }
-    console.log('HOLA')
     this.firebase.crearTicket(fecha, ingreso)?.then(
       respuesta => {
         let id_ticket = respuesta.key;
@@ -92,6 +91,8 @@ export class VentasPage implements OnInit {
           console.error("Could not get ticket ID, aborting");
         }
         else{
+          const ticketPDF = new jsPDF();
+          ticketPDF.text('Novedades Katy', 1, 1);
           for(let producto of this.ticket_productos){
             producto.id_ticket = id_ticket;
             this.firebase.cargarTicketProducto(producto)?.then(
@@ -104,6 +105,7 @@ export class VentasPage implements OnInit {
               }
             )
           }
+          ticketPDF.save('ticket'+id_ticket+'.pdf');
         }
         this.ticket_productos = [];
       }
