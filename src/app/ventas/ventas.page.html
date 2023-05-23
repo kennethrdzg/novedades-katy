@@ -78,7 +78,7 @@
   </form>
   <ion-row style="text-align: center;">
     <ion-col>
-      <ion-button (click)="realizarVenta()">Realizar Venta</ion-button>
+      <ion-button [disabled]="ticket_productos.length<1" (click)="realizarVenta()">Realizar Venta</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
