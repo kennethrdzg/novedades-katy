@@ -121,7 +121,6 @@ export class VentasPage implements OnInit {
             ticketPDF.text('Fecha: ' + fecha.substring(0, 34), 5, 65 + count * 20);
             ticketPDF.addImage(data, 'PNG', 30, 75 + count * 20, 80, 40);
           }
-          console.log("Second")
           ticketPDF.save('ticket'+id_ticket+'.pdf');
         }
         this.ticket_productos = [];
