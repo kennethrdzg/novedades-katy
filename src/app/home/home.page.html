@@ -26,6 +26,20 @@
   <div id="container">
     <ion-grid>
       <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Punto de Venta</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-button (click)="router.navigate(['ventas'])">
+                  ACCEDER
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col>
           <ion-card>
             <ion-card-header>
@@ -38,15 +52,29 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col>
           <ion-card>
             <ion-card-header>
-              <ion-card-title>Punto de Venta</ion-card-title>
+              <ion-card-title>Administrar Usuarios</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-button (click)="router.navigate(['ventas'])">
+              <ion-button (click)="goToUsuarios()">
                 ACCEDER
               </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Reportes de Ventas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button (click)="goToReportes()">ACCEDER</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>
