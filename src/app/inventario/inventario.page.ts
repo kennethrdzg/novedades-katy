@@ -24,11 +24,9 @@ export class InventarioPage implements OnInit {
     private route: ActivatedRoute, 
     protected router: Router, 
     ) {
-      console.log('test 2')
   }
 
   async ngOnInit() {
-    console.log('test 1')
     await this.getInventario();
   }
 
