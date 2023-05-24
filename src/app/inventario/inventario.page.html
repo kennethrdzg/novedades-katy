@@ -55,13 +55,26 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button (click)="router.navigate(['inventario', math.max(pagina_actual - 1, 1)])" [disabled]="pagina_actual <= 1">
-            PREVIOUS
+          <ion-button (click)="router.navigate(['inventario', 1])" [disabled]="pagina_actual <= 1">
+            PRIMERA PÁGINA
           </ion-button>
         </ion-col>
         <ion-col>
+          <ion-button (click)="router.navigate(['inventario', math.max(pagina_actual - 1, 1)])" [disabled]="pagina_actual <= 1">
+            ANTERIOR
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <p>{{pagina_actual}}</p>
+        </ion-col>
+        <ion-col>
           <ion-button (click)="router.navigate(['inventario', math.min(pagina_actual + 1, ultima_pagina)])" [disabled]="pagina_actual >= ultima_pagina">
-            NEXT
+            SIGUIENTE
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="router.navigate(['inventario', ultima_pagina])" [disabled]="pagina_actual >= ultima_pagina">
+            ÚLTIMA PÁGINA
           </ion-button>
         </ion-col>
       </ion-row>

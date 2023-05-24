@@ -18,4 +18,12 @@ export class HomePage {
   logOut(){
     this.firebase.logOut();
   }
+
+  goToUsuarios(){
+    console.log('GO TO USUARIOS')
+  }
+
+  goToReportes(){
+    console.log('GO TO Reportes')
+  }
 }
