@@ -27,7 +27,20 @@
     <ion-grid *ngIf="productos.length > 0">
       <ion-row *ngFor="let producto of productos; index as i">
           <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
-            <ion-button class="product-container" (click)="crearCodigoDeBarras(i)">
+            <ion-row>
+              <ion-col>
+                <ion-row><p>ID: {{codigos_productos[i]}}</p></ion-row>
+                <ion-row><p>Producto: {{producto['nombre']}}</p>  </ion-row>
+                <ion-row><p>Precio: $ {{producto['precio']}} MXN</p></ion-row>
+              </ion-col>
+              <ion-col>
+                <img src="" alt="Imagen del Producto">
+              </ion-col>
+              <ion-col>
+                <ion-button class="product-container" (click)="crearCodigoDeBarras(i)">GENERAR ETIQUETA</ion-button>
+              </ion-col>
+            </ion-row>
+            <!--<ion-button class="product-container" (click)="crearCodigoDeBarras(i)">
               <ion-grid>
                 <ion-row><p>ID: {{codigos_productos[i]}}</p></ion-row>
                 <ion-row><p>Producto: {{producto['nombre']}}</p>  </ion-row>
@@ -37,17 +50,17 @@
               
               
               <p>{{producto['descripcion']}}</p>
-            </ion-button>
+            </ion-button>-->
           </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button (click)="mostrarInventarioAnterior()" [disabled]="pagina_actual <= 1">
+          <ion-button (click)="router.navigate(['inventario', math.max(pagina_actual - 1, 1)])" [disabled]="pagina_actual <= 1">
             PREVIOUS
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button (click)="mostrarInventarioSiguiente()" [disabled]="pagina_actual >= ultima_pagina">
+          <ion-button (click)="router.navigate(['inventario', math.min(pagina_actual + 1, ultima_pagina)])" [disabled]="pagina_actual >= ultima_pagina">
             NEXT
           </ion-button>
         </ion-col>

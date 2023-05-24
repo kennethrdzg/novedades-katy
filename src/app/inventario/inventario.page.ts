@@ -17,12 +17,13 @@ export class InventarioPage implements OnInit {
   productos_por_pagina = 2;
   pagina_actual = 1;
   ultima_pagina = 1;
-
+  math = Math
   admin: boolean = false;
   constructor(
     protected firebase: FirebaseService, 
     private route: ActivatedRoute, 
-    protected router: Router) {
+    protected router: Router, 
+    ) {
       console.log('test 2')
   }
 
@@ -54,12 +55,8 @@ export class InventarioPage implements OnInit {
   }
   actualizarPaginaActual(){
     this.pagina_actual = Number(this.route.snapshot.params['id']);
-    if(this.pagina_actual > this.ultima_pagina){
-      this.pagina_actual = this.ultima_pagina;
-    }
-
-    if(this.pagina_actual < 1){
-      this.pagina_actual = 1;
+    if(Number.isNaN(this.pagina_actual) || this.pagina_actual > this.ultima_pagina || this.pagina_actual < 1){
+      this.router.navigate(['404']);
     }
   }
   mostrarInventarioSiguiente(){
