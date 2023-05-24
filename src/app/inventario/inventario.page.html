@@ -26,13 +26,20 @@
     </ion-grid>
     <ion-grid *ngIf="productos.length > 0">
       <ion-row *ngFor="let producto of productos; index as i">
-        <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
-          <ion-card>
-            <p>Producto: {{producto['nombre']}}</p>
-            <p>Precio: $ {{producto['precio']}} MXN</p>
-            <p>{{producto['descripcion']}}</p>
-          </ion-card>
-        </ion-col>
+          <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
+            <ion-card>
+              <ion-card-content>
+                <svg id="{{codigos_productos[i]}}"></svg>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
+            <ion-card>
+              <p>Producto: {{producto['nombre']}}</p>
+              <p>Precio: $ {{producto['precio']}} MXN</p>
+              <p>{{producto['descripcion']}}</p>
+            </ion-card>
+          </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>

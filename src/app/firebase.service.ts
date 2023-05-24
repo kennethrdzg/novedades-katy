@@ -29,7 +29,6 @@ export class FirebaseService {
             if(respuesta.exists()){
               let values = respuesta.val();
               this.admin = (values['rol'] == 'admin');
-              console.log(this.admin);
             }
           }
         ).catch( err => {
