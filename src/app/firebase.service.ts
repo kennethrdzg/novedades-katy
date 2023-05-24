@@ -123,4 +123,15 @@ export class FirebaseService {
   getEsAdmin(){
     return this.admin;
   }
+
+  buscarProductoPorId(id: string){
+    const databaseRef = ref(getDatabase());
+    return get(child(databaseRef, 'productos/' + id));
+  }
+
+  buscarProductoPorNombre(nombre: string){
+    let productos: Producto[] = []
+    const databaseRef = ref(getDatabase());
+    get(child(databaseRef, 'productos'));
+  }
 }

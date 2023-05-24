@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../producto';
 import * as JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
+import { CrearPDFService } from '../crear-pdf.service';
 
 @Component({
   selector: 'app-inventario',
@@ -22,7 +23,7 @@ export class InventarioPage implements OnInit {
   constructor(
     protected firebase: FirebaseService, 
     private route: ActivatedRoute, 
-    protected router: Router, 
+    protected router: Router, private pdf: CrearPDFService
     ) {
   }
 
@@ -67,16 +68,6 @@ export class InventarioPage implements OnInit {
   }
 
   crearCodigoDeBarras(idx: number){
-    const barcodePDF = new jsPDF();
-    const canvas = document.createElement('canvas');
-    const key = this.codigos_productos[idx];
-    console.log("Clave: " + key)
-    JsBarcode(canvas, key);
-    const data = canvas.toDataURL('image/png');
-    barcodePDF.setFontSize(36);
-    barcodePDF.text(this.productos[idx].nombre, 10, 16);
-    barcodePDF.text('Precio: $' + this.productos[idx].precio.toString(), 10, 32);
-    barcodePDF.addImage(data, 'PNG', 0, 40, 200, 100);
-    barcodePDF.save('barcode_'+key+'.pdf');
+    this.pdf.crearCodigoDeBarras(this.codigos_productos[idx], this.productos[idx]);
   }
 }

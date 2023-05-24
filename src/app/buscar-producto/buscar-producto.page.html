@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="router.navigate(['inventario'])">REGRESAR</ion-button>
+    </ion-buttons>
+    <ion-title>BuscarProducto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">BuscarProducto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input label="Ingrese el código" [(ngModel)]="id"></ion-input>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button (click)="buscarProductoPorId()" [disabled]="id.length < 1">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="error_status || no_existe">
+      <ion-col>
+        <p>No se encontró producto buscado. </p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="producto.nombre.length > 0">
+      <ion-col>
+        <p>Producto: {{producto.nombre}}</p>
+        <p>Precio: {{producto.precio}}</p>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button (click)="crearCodigoDeBarras()">
+          <p>Generar Etiqueta</p>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

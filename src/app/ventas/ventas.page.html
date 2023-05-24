@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="router.navigate(['home'])">REGRESAR</ion-button>
+      <ion-button (click)="regresar()">REGRESAR</ion-button>
     </ion-buttons>
     <ion-title>VENTAS</ion-title>
   </ion-toolbar>
@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
     <ion-grid>
-      <ion-row>
+      <ion-row *ngIf="ticket_productos.length > 0">
         <ion-col>ID</ion-col>
         <ion-col>Artículo</ion-col>
         <ion-col>Cantidad</ion-col>
@@ -46,12 +46,12 @@
         <ion-col class="columna-precio">
           <ion-card>
             <ion-card-content>
-              {{producto.precio}}
+              <p>{{producto.precio}}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col>
-          <ion-button (click)="quitarProducto(i)">
+        <ion-col size="auto">
+          <ion-button (click)="quitarProducto(i)" style="height: 100%">
             <ion-icon name="close-circle"></ion-icon>
           </ion-button>
         </ion-col>
@@ -74,13 +74,17 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-button type="submit" [disabled]="!productoForm.valid">Agregar</ion-button>
+      <ion-col size="auto">
+        <ion-button type="submit" [disabled]="!productoForm.valid" style="height: 100%">Agregar</ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="producto_inexistente">
-      <ion-col>
-        <div>Producto Inexistente</div>
+      <ion-col style="text-align: center;">
+        <ion-card>
+          <ion-card-content size="auto">
+            <p style="color: red; text-decoration: solid;">Error: Producto Inexistente</p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </form>
