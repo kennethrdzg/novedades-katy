@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import {environment} from '../environments/environment.prod'
 import { Producto } from './producto';
 import { getDatabase, ref, push, onValue, child, get, set} from 'firebase/database';
+import { Ticket } from './ticket';
+import { TicketProducto } from './ticket-producto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,6 @@ export class FirebaseService {
             if(respuesta.exists()){
               let values = respuesta.val();
               this.admin = (values['rol'] == 'admin');
-              console.log(this.admin);
             }
           }
         ).catch( err => {
@@ -76,14 +77,37 @@ export class FirebaseService {
   }
 
   //Inventario
-  getProductoPorCodigo(codigo: string){
-    return this.http.get(environment.firebaseConfig.databaseURL + '/productos/' + codigo + '.json')
+  getProductoPorId(id: string){
+    const databaseRef = ref(getDatabase());
+    return get(child(databaseRef, '/productos/' + id));
   }
   
   cargarProductoNuevo(nuevo_producto: Producto){
     const database = getDatabase();
-    return push(ref(database, 'productos/'), nuevo_producto)
-    //return this.http.post(environment.firebaseConfig.databaseURL + '/productos.json', nuevo_producto);
+    return push(ref(database, 'productos/'), nuevo_producto);
+  }
+
+  crearTicket(fecha: string, ingreso: number){
+    const auth = getAuth();
+    if(auth.currentUser != null){
+      let ticket: Ticket = {
+        id_empleado: auth.currentUser.uid, 
+        fecha:fecha, 
+        ingreso: ingreso
+      }
+      const database = getDatabase();
+      return push(ref(database, 'ticket'), ticket)
+    }
+    return null;
+  }
+
+  cargarTicketProducto(ticket_producto: TicketProducto){
+    const auth = getAuth(); 
+    if(auth.currentUser != null){
+      const database = getDatabase(); 
+      return push(ref(database, 'ticket_producto'), ticket_producto);
+    }
+    return null;
   }
 
   getRol(){
@@ -93,7 +117,6 @@ export class FirebaseService {
     if(auth.currentUser == null){
       return;
     };
-    //return get(child(databaseRef, 'productos/'+auth.currentUser.uid));
     return get(child(databaseRef, 'empleados/'+auth.currentUser.uid));
   }
 
