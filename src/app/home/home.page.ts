@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
   admin: boolean = false;
-  constructor(private firebase: FirebaseService, 
+  constructor(protected firebase: FirebaseService, 
     protected router: Router) {
   }
   ngOnInit(){

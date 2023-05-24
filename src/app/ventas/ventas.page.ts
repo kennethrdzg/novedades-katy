@@ -86,6 +86,7 @@ export class VentasPage implements OnInit {
 
   async realizarVenta(){
     this.actualizarSubtotal();
+    let f = new Date();
     let fecha = Date();
     let ingreso = 0;
     for(let producto of this.ticket_productos){
@@ -166,5 +167,11 @@ export class VentasPage implements OnInit {
       })
       setTimeout( () => resolve(result), 1000);
     })
+  }
+
+  regresar(){
+    this.ticket_productos = [];
+    this.productoForm.reset();
+    this.router.navigate(['home']);
   }
 }

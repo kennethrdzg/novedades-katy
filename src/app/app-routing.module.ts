@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./producto-nuevo/producto-nuevo.module').then( m => m.ProductoNuevoPageModule)
   },
   {
+    path: 'buscar-producto',
+    loadChildren: () => import('./buscar-producto/buscar-producto.module').then( m => m.BuscarProductoPageModule)
+  },
+  {
     path: '**', 
     redirectTo: '404', 
     pathMatch: 'full'

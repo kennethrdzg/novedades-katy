@@ -17,7 +17,9 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-
+          <ion-button *ngIf="true" (click)="router.navigate(['buscar-producto'])">BUSCAR PRODUCTO</ion-button>
+        </ion-col>
+        <ion-col>
           <ion-button *ngIf="this.firebase.admin" (click)="router.navigate(['producto-nuevo'])">
             Nuevo Producto
           </ion-button>
@@ -29,14 +31,13 @@
           <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
             <ion-row>
               <ion-col>
-                <ion-row><p>ID: {{codigos_productos[i]}}</p></ion-row>
                 <ion-row><p>Producto: {{producto['nombre']}}</p>  </ion-row>
                 <ion-row><p>Precio: $ {{producto['precio']}} MXN</p></ion-row>
               </ion-col>
               <ion-col>
                 <img src="" alt="Imagen del Producto">
               </ion-col>
-              <ion-col>
+              <ion-col size="auto">
                 <ion-button class="product-container" (click)="crearCodigoDeBarras(i)">GENERAR ETIQUETA</ion-button>
               </ion-col>
             </ion-row>
