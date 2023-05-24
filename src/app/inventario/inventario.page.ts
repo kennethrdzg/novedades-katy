@@ -3,6 +3,7 @@ import { FirebaseService } from '../firebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../producto';
 import * as JsBarcode from 'jsbarcode';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-inventario',
@@ -30,20 +31,6 @@ export class InventarioPage implements OnInit {
     await this.getInventario();
   }
 
-  ngAfterViewChecked(){
-    console.log('After View')
-    this.toBardCode();
-  }
-  /*
-  JsBarcode(key, key);
-  */
-  toBardCode(){
-    for(let key of this.codigos_productos){
-      let canvas = document.getElementById(key);
-      JsBarcode(canvas, key);
-    }
-  }
-
   async getInventario(){
     return new Promise( resolve => {
       this.firebase.getInventario().then(
@@ -66,7 +53,6 @@ export class InventarioPage implements OnInit {
     })
   }
   actualizarPaginaActual(){
-    console.log(this.router.url.split('/'));
     this.pagina_actual = Number(this.route.snapshot.params['id']);
     if(this.pagina_actual > this.ultima_pagina){
       this.pagina_actual = this.ultima_pagina;
@@ -78,14 +64,24 @@ export class InventarioPage implements OnInit {
   }
   mostrarInventarioSiguiente(){
     this.pagina_actual ++;
-    this.pagina_actual = Math.min(this.pagina_actual, this.ultima_pagina);
-    this.router.navigate(['/inventario', this.pagina_actual]);
-    this.actualizarPaginaActual()
+    this.router.navigate(['/inventario', Math.min(this.pagina_actual, this.ultima_pagina)]);
   }
   mostrarInventarioAnterior(){
     this.pagina_actual --;
-    this.pagina_actual = Math.max(1, this.pagina_actual);
-    this.router.navigate(['/inventario', this.pagina_actual]);
-    this.actualizarPaginaActual();
+    this.router.navigate(['/inventario', Math.max(this.pagina_actual, 1)]);
+  }
+
+  crearCodigoDeBarras(idx: number){
+    const barcodePDF = new jsPDF();
+    const canvas = document.createElement('canvas');
+    const key = this.codigos_productos[idx];
+    console.log("Clave: " + key)
+    JsBarcode(canvas, key);
+    const data = canvas.toDataURL('image/png');
+    barcodePDF.setFontSize(36);
+    barcodePDF.text(this.productos[idx].nombre, 10, 16);
+    barcodePDF.text('Precio: $' + this.productos[idx].precio.toString(), 10, 32);
+    barcodePDF.addImage(data, 'PNG', 0, 40, 200, 100);
+    barcodePDF.save('barcode_'+key+'.pdf');
   }
 }
