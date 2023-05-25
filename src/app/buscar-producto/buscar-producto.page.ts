@@ -15,7 +15,7 @@ export class BuscarProductoPage implements OnInit {
   error_status: boolean = false; 
   no_existe: boolean = false;
 
-  producto: Producto = {nombre: '', precio: 0, descripcion: ''};
+  producto: Producto = {nombre: '', precio: 0, descripcion: '', unidades: 0};
   constructor(private firebase: FirebaseService, 
     protected router: Router, private pdf: CrearPDFService) { }
 
