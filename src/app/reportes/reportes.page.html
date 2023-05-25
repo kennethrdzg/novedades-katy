@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="this.router.navigate(['home'])">REGRESAR</ion-button>
+    </ion-buttons>
     <ion-title>Reportes</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,10 +13,20 @@
       <ion-title size="large">Reportes</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
+  <ion-grid style="text-align: center;">
     <ion-row>
       <ion-col>
         <ion-button (click)="reporteDiario()">Reporte Diario</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button>Reporte Semanal</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button>Reporte Mensual</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

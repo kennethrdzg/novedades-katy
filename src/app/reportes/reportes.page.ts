@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { Ticket } from '../ticket';
 import jsPDF from 'jspdf';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reportes',
@@ -11,7 +12,8 @@ import jsPDF from 'jspdf';
 export class ReportesPage implements OnInit {
 
   constructor(
-    private firebase: FirebaseService
+    private firebase: FirebaseService, 
+    protected router: Router
   ) { }
 
   ngOnInit() {

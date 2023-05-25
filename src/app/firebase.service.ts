@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 
 //Firebase
-import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
+import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword} from 'firebase/auth'
 import { Router } from '@angular/router';
 import {environment} from '../environments/environment.prod'
 import { Producto } from './producto';
@@ -139,5 +139,25 @@ export class FirebaseService {
     const databaseRef = ref(getDatabase());
 
     return get(child(databaseRef, 'tickets'));
+  }
+
+  crearUsuario(email: string, password: string, role: string){
+    const auth = getAuth();
+    const database = getDatabase();
+    createUserWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
+        const user = userCredential.user;
+        const uid = user.uid;
+        set(ref(database, 'empleados/'+uid), {'rol': role}).catch(
+          err => {
+            alert('Error al asignar rol al usuario, contacte con su administrador');
+          }
+        )
+      }
+    ).catch(
+      err => {
+        alert(err.message);
+      }
+    )
   }
 }
