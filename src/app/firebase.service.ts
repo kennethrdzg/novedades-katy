@@ -140,11 +140,12 @@ export class FirebaseService {
   crearUsuario(email: string, password: string, role: string){
     const auth = getAuth();
     const database = getDatabase();
-    createUserWithEmailAndPassword(auth, email, password).then(
+    return createUserWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
         const user = userCredential.user;
         const uid = user.uid;
         alert('Usuario creado exitosamente. Ingresando a su cuenta.');
+        window.location.reload()
         set(ref(database, 'empleados/'+uid), {'rol': role}).catch(
           err => {
             alert('Error al asignar rol al usuario, contacte con su administrador');

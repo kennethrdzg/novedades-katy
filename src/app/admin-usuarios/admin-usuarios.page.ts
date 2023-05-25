@@ -28,11 +28,7 @@ export class AdminUsuariosPage implements OnInit {
   }
 
   crearUsuario(){
-    this.firebase.crearUsuario(this.email?.getRawValue(), this.password?.getRawValue(), this.role?.getRawValue()).then(
-      () => {
-        this.router.navigate(['home']);
-      }
-    );
+    this.firebase.crearUsuario(this.email?.getRawValue(), this.password?.getRawValue(), this.role?.getRawValue());
   }
 
   get email(){
