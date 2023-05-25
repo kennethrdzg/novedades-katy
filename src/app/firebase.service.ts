@@ -155,7 +155,7 @@ export class FirebaseService {
       err => {
         alert(err.message);
       }
-    )
+    );
   }
 
   actualizarProducto(producto_id: string, parametro: string, valor: any){
