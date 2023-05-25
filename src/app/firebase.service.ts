@@ -96,7 +96,7 @@ export class FirebaseService {
         ingreso: ingreso
       }
       const database = getDatabase();
-      return push(ref(database, 'ticket'), ticket)
+      return push(ref(database, 'tickets'), ticket)
     }
     return null;
   }
@@ -105,7 +105,7 @@ export class FirebaseService {
     const auth = getAuth(); 
     if(auth.currentUser != null){
       const database = getDatabase(); 
-      return push(ref(database, 'ticket_producto'), ticket_producto);
+      return push(ref(database, 'ticket_productos'), ticket_producto);
     }
     return null;
   }
@@ -133,5 +133,11 @@ export class FirebaseService {
     let productos: Producto[] = []
     const databaseRef = ref(getDatabase());
     get(child(databaseRef, 'productos'));
+  }
+
+  getTickets(){
+    const databaseRef = ref(getDatabase());
+
+    return get(child(databaseRef, 'tickets'));
   }
 }

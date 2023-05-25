@@ -36,9 +36,17 @@ const routes: Routes = [
     loadChildren: () => import('./buscar-producto/buscar-producto.module').then( m => m.BuscarProductoPageModule)
   },
   {
+    path: 'reportes',
+    loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
+  },
+  {
     path: '**', 
     redirectTo: '404', 
     pathMatch: 'full'
+  },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
   },
 ];
 
