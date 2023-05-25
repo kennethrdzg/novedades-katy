@@ -38,7 +38,7 @@ export class BuscarProductoPage implements OnInit {
         }
       }
     ).catch( err => {
-      console.error(err);
+      alert(err);
       this.error_status = true;
       this.producto.nombre = '';
       this.last_id = '';

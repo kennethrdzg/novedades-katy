@@ -47,7 +47,7 @@ export class InventarioPage implements OnInit {
           }
         }
       ).catch( err => {
-        console.error(err);
+        alert(err);
       })
       setTimeout(resolve, 1000);
     })
