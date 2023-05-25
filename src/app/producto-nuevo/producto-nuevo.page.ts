@@ -34,9 +34,8 @@ export class ProductoNuevoPage implements OnInit {
       respuesta => {
         console.log(respuesta);
       }
-    ).catch( error => {
-      console.error(error.code);
-      console.error(error.message);
+    ).catch( err => {
+      alert(err)
     });
 
     this.router.navigate(['inventario'])

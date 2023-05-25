@@ -63,7 +63,7 @@ export class VentasPage implements OnInit {
         this.productoForm.reset();
       }
     ).catch( err => {
-      console.error(err);
+      alert(err);
     })
   }
 
@@ -96,7 +96,7 @@ export class VentasPage implements OnInit {
       async respuesta => {
         let id_ticket = respuesta.key;
         if(id_ticket == null){
-          console.error("Could not get ticket ID, aborting");
+          alert('No se registró el ticket, cancelando operación');
         }
         else{
           //let canvas = (<HTMLCanvasElement>document.getElementById('ticket-canvas')); 
@@ -128,7 +128,7 @@ export class VentasPage implements OnInit {
       }
     ).catch(
       err => {
-        console.error(err);
+        alert(err);
       }
     );
   }
@@ -163,7 +163,7 @@ export class VentasPage implements OnInit {
           //ticketPDF.text(ticket_producto.unidades.toString() + ' x $' + ticket_producto.precio.toString(), 100, start + count * buffer);
         }
       ).catch(err => {
-        console.error(err);
+        alert(err);
       })
       setTimeout( () => resolve(result), 1000);
     })

@@ -32,7 +32,7 @@ export class FirebaseService {
             }
           }
         ).catch( err => {
-          console.error(err);
+          alert(err);
         })
         if(router.url == '/login'){
           router.navigate(['home']);
@@ -58,21 +58,17 @@ export class FirebaseService {
       const user = userCredential.user;
       this.logged_user = user
     })
-    .catch( (error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error("Error code: " + errorCode)
-      console.error(errorMessage);
+    .catch( (err) => {
+      alert(err);
     });
   }
 
   logOut(){
     const auth = getAuth();
     signOut(auth).then( () => {
-      console.log("Sign-out succesful");
-    }).catch( (error) => {
-      console.error(error.code);
-      console.error(error.message);
+      alert("Sign-out succesful");
+    }).catch( (err) => {
+      alert(err);
     })
   }
 
@@ -148,6 +144,7 @@ export class FirebaseService {
       (userCredential) => {
         const user = userCredential.user;
         const uid = user.uid;
+        alert('Usuario creado exitosamente. Ingresando a su cuenta.');
         set(ref(database, 'empleados/'+uid), {'rol': role}).catch(
           err => {
             alert('Error al asignar rol al usuario, contacte con su administrador');
