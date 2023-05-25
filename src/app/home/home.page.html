@@ -60,14 +60,14 @@
               <ion-card-title>Administrar Usuarios</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-button (click)="goToUsuarios()">
+              <ion-button (click)="router.navigate(['admin-usuarios'])">
                 ACCEDER
               </ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="firebase.admin">
         <ion-col>
           <ion-card>
             <ion-card-header>
