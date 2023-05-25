@@ -157,4 +157,9 @@ export class FirebaseService {
       }
     )
   }
+
+  actualizarProducto(producto_id: string, parametro: string, valor: any){
+    const databaseRef = ref(getDatabase(), 'productos/'+producto_id+'/'+parametro);
+    return set(databaseRef, valor);
+  }
 }

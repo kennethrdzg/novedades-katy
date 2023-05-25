@@ -13,7 +13,8 @@ export class ProductoNuevoPage implements OnInit {
   productForm = this.fb.group({
     nombre: ['', Validators.required], 
     precio: [0, [Validators.required, Validators.min(1)]], 
-    descripcion: ['']
+    descripcion: [''], 
+    unidades: [0, [Validators.required, Validators.min(0)]]
   })
   constructor(
     private firebase: FirebaseService, 
@@ -28,17 +29,17 @@ export class ProductoNuevoPage implements OnInit {
     let nuevo_producto: Producto = {
       'nombre': this.nombre?.getRawValue(), 
       'precio': this.precio?.getRawValue(), 
-      'descripcion': this.descripcion?.getRawValue()
+      'descripcion': this.descripcion?.getRawValue(), 
+      'unidades': this.unidades?.getRawValue()
     }
     this.firebase.cargarProductoNuevo(nuevo_producto).then(
       respuesta => {
         console.log(respuesta);
+        this.router.navigate(['inventario']);
       }
     ).catch( err => {
       alert(err)
     });
-
-    this.router.navigate(['inventario'])
   }
   get nombre(){
     return this.productForm.get('nombre');
@@ -48,5 +49,8 @@ export class ProductoNuevoPage implements OnInit {
   }
   get descripcion(){
     return this.productForm.get('descripcion');
+  }
+  get unidades(){
+    return this.productForm.get('unidades');
   }
 }
