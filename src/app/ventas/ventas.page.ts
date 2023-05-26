@@ -63,7 +63,7 @@ export class VentasPage implements OnInit {
         this.productoForm.reset();
       }
     ).catch( err => {
-      console.error(err);
+      alert(err);
     })
   }
 
@@ -96,7 +96,7 @@ export class VentasPage implements OnInit {
       async respuesta => {
         let id_ticket = respuesta.key;
         if(id_ticket == null){
-          console.error("Could not get ticket ID, aborting");
+          alert('No se registró el ticket, cancelando operación');
         }
         else{
           //let canvas = (<HTMLCanvasElement>document.getElementById('ticket-canvas')); 
@@ -128,7 +128,7 @@ export class VentasPage implements OnInit {
       }
     ).catch(
       err => {
-        console.error(err);
+        alert(err);
       }
     );
   }
@@ -155,6 +155,14 @@ export class VentasPage implements OnInit {
         respuesta => {
           if(respuesta.key != null){
             result = respuesta.key;
+            this.firebase.getProductoPorId(ticket_producto.id_producto).then(
+              resultado => {
+                if(resultado.exists()){
+                  let unidades: number = resultado.val()['unidades'];
+                  this.firebase.actualizarProducto(ticket_producto.id_producto, 'unidades', unidades - ticket_producto.unidades);
+                }
+              }
+            )
           }
           ticketPDF.text(ticket_producto.nombre.toString(), 5, start + count * buffer); 
           ticketPDF.text('$' + ticket_producto.precio.toString(), 60, start + count * buffer);
@@ -163,7 +171,7 @@ export class VentasPage implements OnInit {
           //ticketPDF.text(ticket_producto.unidades.toString() + ' x $' + ticket_producto.precio.toString(), 100, start + count * buffer);
         }
       ).catch(err => {
-        console.error(err);
+        alert(err);
       })
       setTimeout( () => resolve(result), 1000);
     })

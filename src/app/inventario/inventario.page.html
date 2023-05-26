@@ -30,9 +30,27 @@
       <ion-row *ngFor="let producto of productos; index as i">
           <ion-col *ngIf="i < productos_por_pagina * pagina_actual && i >= productos_por_pagina * (pagina_actual - 1)">
             <ion-row>
-              <ion-col>
-                <ion-row><p>Producto: {{producto['nombre']}}</p>  </ion-row>
-                <ion-row><p>Precio: $ {{producto['precio']}} MXN</p></ion-row>
+              <ion-col style="text-align: center;">
+                <ion-row>
+                  <ion-col>
+                    <p>ID: {{codigos_productos[i]}}</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <p>Producto: {{producto['nombre']}}</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <p>Precio: $ {{producto['precio']}} MXN</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <p>Unidades: {{producto['unidades']}}</p>
+                  </ion-col>
+                </ion-row>
               </ion-col>
               <ion-col>
                 <img src="" alt="Imagen del Producto">

@@ -15,20 +15,20 @@
   </ion-header>
     <ion-grid>
       <ion-row *ngIf="ticket_productos.length > 0">
-        <ion-col>ID</ion-col>
+        <!--<ion-col>ID</ion-col>-->
         <ion-col>Artículo</ion-col>
         <ion-col>Cantidad</ion-col>
         <ion-col>Precio Unitario</ion-col>
         <ion-col>Eliminar</ion-col>
       </ion-row>
       <ion-row *ngFor="let producto of ticket_productos; index as i">
-        <ion-col>
+        <!--<ion-col>
           <ion-card>
             <ion-card-content>
               {{producto.id_producto}}
             </ion-card-content>
           </ion-card>
-        </ion-col>
+        </ion-col>-->
         <ion-col class="columna-nombre">
           <ion-card>
             <ion-card-content>
@@ -46,7 +46,7 @@
         <ion-col class="columna-precio">
           <ion-card>
             <ion-card-content>
-              <p>{{producto.precio}}</p>
+              <p>${{producto.precio}}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -61,7 +61,7 @@
           <p>Sub Total</p>
         </ion-col>
         <ion-col>
-          <p>{{sub_total}}</p>
+          <p>${{sub_total}}</p>
         </ion-col>
       </ion-row>
     </ion-grid>

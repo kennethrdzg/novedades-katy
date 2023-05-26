@@ -40,13 +40,13 @@ const routes: Routes = [
     loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
   },
   {
+    path: 'admin-usuarios',
+    loadChildren: () => import('./admin-usuarios/admin-usuarios.module').then( m => m.AdminUsuariosPageModule)
+  },
+  {
     path: '**', 
     redirectTo: '404', 
     pathMatch: 'full'
-  },
-  {
-    path: 'reportes',
-    loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
   },
 ];
 

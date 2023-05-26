@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="router.navigate(['home'])">REGRESAR</ion-button>
+    </ion-buttons>
+    <ion-title>AdminUsuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">AdminUsuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid style="text-align: center;">
+   <ion-row>
+    <ion-col>
+      <form [formGroup]="userForm" (ngSubmit)="crearUsuario()">
+        <ion-row>
+          <ion-col>
+            <ion-input
+            label="Correo electrónico"
+            placeholder="ejemplo@dominio.com"
+            type="email"
+            formControlName="email"
+            errorText="Correo Inválido"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input 
+            id="password" 
+            label="Contraseña"
+            placeholder="Ejemplo123!"
+            type="password"
+            formControlName="password"
+            errorText="Contraseña inválida, debe contar con al menos 8 caracteres alfanuméricos. ">
+          </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Rol</p>
+          </ion-col>
+          <ion-col>
+            <ion-select placeholder="Seleccione un Rol para el empleado" formControlName="role" errorText="Error">
+              <ion-select-option value="admin">Admin</ion-select-option>
+              <ion-select-option value="empleado">Empleado</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" [disabled]="!userForm.valid">Crear Usuario</ion-button>
+          </ion-col>
+        </ion-row>
+       
+        
+      </form>
+    </ion-col>
+   </ion-row> 
+  </ion-grid>
+</ion-content>

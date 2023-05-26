@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 
 //Firebase
-import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
+import {getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword} from 'firebase/auth'
 import { Router } from '@angular/router';
 import {environment} from '../environments/environment.prod'
 import { Producto } from './producto';
@@ -32,7 +32,7 @@ export class FirebaseService {
             }
           }
         ).catch( err => {
-          console.error(err);
+          alert(err);
         })
         if(router.url == '/login'){
           router.navigate(['home']);
@@ -58,21 +58,17 @@ export class FirebaseService {
       const user = userCredential.user;
       this.logged_user = user
     })
-    .catch( (error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error("Error code: " + errorCode)
-      console.error(errorMessage);
+    .catch( (err) => {
+      alert(err);
     });
   }
 
   logOut(){
     const auth = getAuth();
     signOut(auth).then( () => {
-      console.log("Sign-out succesful");
-    }).catch( (error) => {
-      console.error(error.code);
-      console.error(error.message);
+      alert("Sign-out succesful");
+    }).catch( (err) => {
+      alert(err);
     })
   }
 
@@ -139,5 +135,32 @@ export class FirebaseService {
     const databaseRef = ref(getDatabase());
 
     return get(child(databaseRef, 'tickets'));
+  }
+
+  crearUsuario(email: string, password: string, role: string){
+    const auth = getAuth();
+    const database = getDatabase();
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
+        const user = userCredential.user;
+        const uid = user.uid;
+        alert('Usuario creado exitosamente. Ingresando a su cuenta.');
+        window.location.reload()
+        set(ref(database, 'empleados/'+uid), {'rol': role}).catch(
+          err => {
+            alert('Error al asignar rol al usuario, contacte con su administrador');
+          }
+        )
+      }
+    ).catch(
+      err => {
+        alert(err.message);
+      }
+    );
+  }
+
+  actualizarProducto(producto_id: string, parametro: string, valor: any){
+    const databaseRef = ref(getDatabase(), 'productos/'+producto_id+'/'+parametro);
+    return set(databaseRef, valor);
   }
 }
